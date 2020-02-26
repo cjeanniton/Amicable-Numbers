@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Amicable Numbers</title>
+	
+<style>
+	body {background-color: #444544}
+	.header {color: #F6F1BE; font-size: 50px; text-align: center; text-decoration: underline}
+	p {color: #F6F1BE; font-size: 30px}
+	hr {border-color: #F6F1BE}
+	h3 {color: #F6F1BE}
+	.button_instruction {color: #F6F1BE}
+</style>
+	
+<div class="header">
+	Amicable Number Test
+</div>
+</head>
+
+<body>
+		
+	<div class="input">
+		<p>Enter First Number:</p>
+		<input type="text" id="number1" name="number1">
+		
+		<br>
+		
+		<p>Enter Second Number:</p>
+		<input type="text" id="number2" name="number2">
+		
+		<br>
+		<br>
+		
+		<div class="button_instruction">(Press "Test Numbers" to check if Second Number is a factor of First Number.</div>
+		
+		<button type="button" onclick="isFactor()">Test Numbers</button>
+		<button type="button" onclick="getFactors()">Get Factors</button>
+		
+		<br>
+		<br>
+		<hr>
+		
+		<p>Results: </p>
+		<h3>Is Second Number a Factor?: <input type="text" id="factor_answ" name="factor_answ" readonly></h3>
+		
+		<h3>First Number Factors Are: <input type="text" id="factors_1" name="factors_1" readonly></h3>
+		
+		<h3>Second Number Factors Are: <input type="text" id="factors_2" name="factors_2" readonly></h3>
+		
+		<h3>Sum of First Number Factors: <input type="text" id="first_sum" name="first_sum" readonly></h3>
+		
+		<h3>Sum of Second Number Factors: <input type="text" id="second_sum" name="second_sum" readonly></h3>
+		
+		<h3>Are the Numbers Amicable?: <input type="text" id="amicable" name="amicable" readonly></h3>
+	</div>
+	
+	<script language="javascript">
+		
+//		test_array = [1, 2, 3];
+		
+		function isFactor(num1, num2) // IF DIVISION RESULTS IN REMAINDER OF 0, DISPLAYS "YES", OTHERWISE, "NO"
+		{
+			num1 = document.getElementById("number1").value;
+//			alert("number 1 is: " + num1);
+			num2 = document.getElementById("number2").value;
+//			alert("number 2 is: " + testnum);
+			
+			if (num1 % num2 == 0)
+				{
+//					alert(testnum + " is a factor of " + num1);
+					document.getElementById("factor_answ").value = "Yes";
+					return true;
+				}
+			else
+				{
+					document.getElementById("factor_answ").value = "No";
+//					alert(testnum + " is not a factor of " + num1);
+				}
+		}
+		
+		function addFactors(factors_1, factors_2) // ADDS FACTORS, DISPLAYS SUMS, DETERMINES IF AMICABLE 
+		{
+//			alert("factors to add are: " + factors_1 + " and " + factors_2);
+			var factor1_sum = 0;
+			var factor2_sum = 0;
+			
+			for (i = 0; i < factors_1.length; i++)
+				{
+					factor1_sum += factors_1[i]; 
+				}
+			
+			for (i = 0; i < factors_2.length; i++)
+				{
+					factor2_sum += factors_2[i];
+				}
+			
+//			alert("sum is: " + factor1_sum);
+			document.getElementById("first_sum").value = factor1_sum;
+			document.getElementById("second_sum").value = factor2_sum;
+			
+			if (factor1_sum == document.getElementById("number2").value && factor2_sum == document.getElementById("number1").value) // CHECKS IF TWO NUMBERS ARE AMICABLE
+				{
+					document.getElementById("amicable").value = "Yes";
+				}
+			else
+				{
+					document.getElementById("amicable").value = "No";
+				}
+		}
+		
+		function getFactors(number)
+		{
+			number_1 = document.getElementById("number1").value;
+			number_2 = document.getElementById("number2").value;
+//			alert("number 1 is: " + number_1);
+//			alert("number 2 is: " + number_2);
+			var factors_1 = [1]; // CREATES AN ARRAY OF FACTORS WITH 1 ALREADY IN IT B/C EVERY ENTRY WILL HAVE "1"
+			var factors_2 = [1];
+//			alert("current factors are: " + factors);
+			for (i = 2; i < number_1; i ++)
+				{
+//					alert("number is: " + number);
+					if(number_1 % i == 0)
+						{
+//							alert(i + " is a factor of " + number);
+							factors_1.push(i); // ADDS THE FACTORS TO AN ARRAY
+						}
+					else
+					{
+//						alert("not a factor");
+						continue;	
+					}
+				}
+			
+			for (i = 2; i < number_2; i ++)
+				{
+					if(number_2 % i == 0)
+						{
+							factors_2.push(i);
+						}
+					else
+					{
+						continue;	
+					}
+				}
+//			alert("factor array is: " + factors);
+			document.getElementById("factors_1").value = factors_1; // DISPLAYS THE ARRAY OF FACTORS
+			document.getElementById("factors_2").value = factors_2;
+			addFactors(factors_1, factors_2);
+			
+		}
+		
+		function showFactors(factors)
+		{
+//			document.getElementById("factors").value = factors; // DOESNT WORK ATM, getFactors WILL HANDLE DISPLAY
+		}
+		
+	</script>
+		
+</body>
+</html>
